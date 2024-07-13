@@ -1,0 +1,60 @@
+version: '3.1'
+
+services:
+
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: akshay
+      WORDPRESS_DB_PASSWORD: akshaypass
+      WORDPRESS_DB_NAME: akshaydb
+    volumes:
+      - wordpress:/var/www/html
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: akshaydb
+      MYSQL_USER: akshay
+      MYSQL_PASSWORD: akshaypass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/lib/mysql
+
+  auth:
+    build: 
+      context: ./backend/authService
+      dockerfile: Dockerfile
+    ports:
+      - '3001:3001'
+    depends_on:
+      - wordpress
+  
+  stream:
+    build: 
+      context: ./backend/streamingService
+      dockerfile: Dockerfile
+    ports:
+      - '3002:3002'
+    depends_on:
+      - wordpress
+  
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
+    depends_on:
+      - auth
+      - stream
+
+
+volumes:
+  wordpress:
+  db:
