@@ -1,17 +1,20 @@
 # StreamingApp
-Collaborative Streaming application
 
-## Backend
+This is the README file for the StreamingApp project.
 
-### AuthService
-`.env` file for the Authentication Service.
+## Getting Started
 
-```sh
-PORT=3001
-MONGO_URI="yourMongoDB_URIwithDatabaseName"
-JWT_SECRET="writesomerandomsecrets"
-AWS_KEY_ID='asfdasdfasfasf'
-AWS_SECRET_KEY='adsafsasfdafs'
-AWS_REGION='ap-south-1'
-AWS_S3_BUCKET='streamingappservice'
-```
+To run the StreamingApp, follow the steps below:
+
+1. Build the Docker image using the command `docker-compose build`.
+2. Start the containers using the command `docker-compose up`.
+3. Once the containers are up and running, access the application in your browser using the provided port information.
+
+To access the StreamingApp, open `localhost` in your browser. To set up WordPress, use `localhost:8080`.
+
+For setting up WordPress, use the following credentials:
+
+- **Username:** akshay
+- **Password:** akshaypass
+
+Please make sure you have Docker installed on your machine before proceeding with the above steps.
